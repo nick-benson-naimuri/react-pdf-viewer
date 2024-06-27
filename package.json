@@ -16,6 +16,7 @@
         "pdf.js",
         "pdf viewer"
     ],
+    "packageManager": "yarn",
     "private": true,
     "workspaces": [
         "packages/*"
