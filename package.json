@@ -16,7 +16,7 @@
         "pdf.js",
         "pdf viewer"
     ],
-    "packageManager": "yarn",
+    "packageManager": "yarn@1.22.22",
     "private": true,
     "workspaces": [
         "packages/*"
@@ -51,7 +51,7 @@
         "jest-environment-jsdom": "^29.7.0",
         "jest-puppeteer": "^9.0.1",
         "path2d-polyfill": "^2.0.1",
-        "pdfjs-dist": "^4.0.379",
+        "pdfjs-dist": "4.3.136",
         "prettier": "^3.0.3",
         "puppeteer": "^21.3.6",
         "react": "^18.2.0",
