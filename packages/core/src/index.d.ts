@@ -484,7 +484,7 @@ export interface PdfJsApiProvider {
     SVGGraphics: PdfJs.SVGGraphicsConstructor;
 
     // Render text layer
-    renderTextLayer(params: PdfJs.RenderTextLayerParams): PdfJs.PageRenderTask;
+    TextLayer: PdfJs.TextLayer;
 }
 export interface PdfJsApiContextProps {
     pdfJsApiProvider?: PdfJsApiProvider;
@@ -588,6 +588,13 @@ export interface VisiblePagesRange {
 
 export type SetRenderRange = (visiblePagesRange: VisiblePagesRange) => { endPage: number; startPage: number };
 
+export interface ProviderProps {
+    children?: React.ReactNode;
+    pdfApiProvider: PdfJsApiProvider;
+    workerUrl: string;
+}
+export class Provider extends React.Component<ProviderProps> {}
+
 export interface ViewerProps {
     characterMap?: CharacterMap;
     // The default zoom level
@@ -630,12 +637,6 @@ export interface ViewerProps {
     onZoom?(e: ZoomEvent): void;
 }
 export class Viewer extends React.Component<ViewerProps> {}
-
-export interface WorkerProps {
-    children?: React.ReactNode;
-    workerUrl: string;
-}
-export class Worker extends React.Component<WorkerProps> {}
 
 // Hooks
 export function useDebounceCallback<T extends unknown[]>(callback: (...args: T) => void, wait: number): void;
@@ -695,6 +696,7 @@ export declare namespace PdfJs {
     // Worker
     const GlobalWorkerOptions: GlobalWorker;
     interface GlobalWorker {
+        workerPort: Worker;
         workerSrc: string;
     }
 
@@ -842,11 +844,16 @@ export declare namespace PdfJs {
     let SVGGraphics: SVGGraphicsConstructor;
 
     // Render text layer
-    interface RenderTextLayerParams {
-        textContent?: PageTextContent;
+    const TextLayer: TextLayer;
+    interface TextLayerConstructorParams {
         textContentSource: PageTextContent;
         container: HTMLDivElement;
         viewport: ViewPort;
+    }
+    interface TextLayer {
+        new (params: TextLayerConstructorParams): TextLayer;
+        render(): Promise<any>;
+        cancel(): void;
     }
     interface PageTextContent {
         items: PageTextItem[];
@@ -854,7 +861,6 @@ export declare namespace PdfJs {
     interface PageTextItem {
         str: string;
     }
-    function renderTextLayer(params: RenderTextLayerParams): PageRenderTask;
 
     // Annotations layer
     interface AnnotationsParams {
