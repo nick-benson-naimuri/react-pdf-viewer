@@ -15,6 +15,7 @@ import { ToggleStatus } from '../structs/ToggleStatus';
 import { uniqueId } from '../utils/uniqueId';
 import { Portal } from './Portal';
 import { TooltipBody } from './TooltipBody';
+import { Offset } from '../types';
 
 type RenderTooltipContent = () => React.ReactNode;
 
@@ -23,6 +24,7 @@ export const Tooltip: React.FC<{
     content: RenderTooltipContent;
     position: Position;
     target: React.ReactElement;
+    offset?: Offset;
 }> = ({ ariaControlsSuffix, content, position, target }) => {
     const { opened, toggle } = useToggle(false);
     const targetRef = React.useRef<HTMLDivElement>();
@@ -81,7 +83,7 @@ export const Tooltip: React.FC<{
         <>
             <div
                 ref={targetRef}
-                aria-describedby={`rpv-core__tooltip-body-${controlsSuffix}`}
+                aria-describedby={opened ? `rpv-core__tooltip-body-${controlsSuffix}` : undefined}
                 onBlur={onBlur}
                 onFocus={open}
                 onMouseEnter={open}

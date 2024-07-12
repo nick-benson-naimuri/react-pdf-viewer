@@ -28,7 +28,8 @@ import { type ToolbarSlot } from './types/ToolbarSlot';
 
 export const MoreActionsPopover: React.FC<{
     toolbarSlot: ToolbarSlot;
-}> = ({ toolbarSlot }) => {
+    ariaControls?: string;
+}> = ({ toolbarSlot, ariaControls }) => {
     const { l10n } = React.useContext(LocalizationContext);
     const {
         DownloadMenuItem,
@@ -61,6 +62,8 @@ export const MoreActionsPopover: React.FC<{
                         isSelected={opened}
                         testId="toolbar__more-actions-popover-target"
                         onClick={toggle}
+                        ariaExpanded={opened}
+                        ariaControls={ariaControls}
                     >
                         <MoreIcon />
                     </MinimalButton>

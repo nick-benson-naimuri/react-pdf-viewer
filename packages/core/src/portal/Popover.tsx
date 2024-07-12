@@ -16,9 +16,10 @@ import { uniqueId } from '../utils/uniqueId';
 import { PopoverBody } from './PopoverBody';
 import { PopoverOverlay } from './PopoverOverlay';
 import { Portal } from './Portal';
+import { Offset } from '../types';
 
 export type RenderContent = (toggle: Toggle) => React.ReactNode;
-export type RenderTarget = (toggle: Toggle, opened: boolean) => React.ReactNode;
+export type RenderTarget = (toggle: Toggle, opened: boolean, ariaControls?: string) => React.ReactNode;
 
 export const Popover: React.FC<{
     ariaControlsSuffix?: string;
@@ -29,6 +30,7 @@ export const Popover: React.FC<{
     lockScroll?: boolean;
     position: Position;
     target: RenderTarget;
+    offset?: Offset;
 }> = ({
     ariaHasPopup = 'dialog',
     ariaControlsSuffix,

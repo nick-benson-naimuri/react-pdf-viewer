@@ -42,6 +42,8 @@ export interface OnHighlightKeyword {
 
 export interface RenderShowSearchPopoverProps {
     onClick: () => void;
+    opened: boolean;
+    ariaControls?: string;
 }
 
 export type SingleKeyword = string | RegExp | FlagKeyword;

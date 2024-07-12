@@ -17,7 +17,9 @@ export const ShowSearchPopoverButton: React.FC<{
     enableShortcuts: boolean;
     store: Store<StoreProps>;
     onClick(): void;
-}> = ({ enableShortcuts, store, onClick }) => {
+    opened?: boolean;
+    ariaControls?: string;
+}> = ({ enableShortcuts, store, onClick, opened, ariaControls }) => {
     const ariaKeyShortcuts = enableShortcuts ? (isMac() ? 'Meta+F' : 'Ctrl+F') : '';
 
     const handleShortcutsPressed: StoreHandler<boolean> = (areShortcutsPressed: boolean) => {
@@ -46,6 +48,8 @@ export const ShowSearchPopoverButton: React.FC<{
                             ariaLabel={p.label}
                             testId="search__popover-button"
                             onClick={onClick}
+                            ariaExpanded={opened}
+                            ariaControls={ariaControls}
                         >
                             {p.icon}
                         </MinimalButton>
