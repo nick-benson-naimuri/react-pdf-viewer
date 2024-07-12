@@ -16,9 +16,8 @@
         "pdf.js",
         "pdf viewer"
     ],
-    "packageManager": "yarn@1.22.22",
     "private": true,
-    "packageManager": "npm@10.7.0",
+    "packageManager": "yarn@1.22.22",
     "workspaces": [
         "packages/*"
     ],
@@ -31,6 +30,9 @@
         "lint": "eslint packages/**/src/*.ts packages/**/src/*.tsx",
         "format": "prettier --write \"**/*.+(css|js|json|jsx|less|md|ts|tsx)\"",
         "release": "turbo run release"
+    },
+    "dependencies": {
+        "turbo": "^2.0.4"
     },
     "devDependencies": {
         "@rollup/plugin-json": "^6.1.0",
@@ -61,7 +63,6 @@
         "sass": "^1.77.6",
         "ts-jest": "^29.1.5",
         "ts-node": "^10.9.2",
-        "turbo": "^2.0.4",
         "typescript": "^5.5.2",
         "web-streams-polyfill": "^4.0.0"
     }
